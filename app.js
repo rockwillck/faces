@@ -179,4 +179,63 @@ function render() {
     angleIndex += 0.1
 
 }
-render()
+
+const musicPaths = `lofi/01 HoliznaCC0 - Not It (Lofi).mp3.mp3
+lofi/02 HoliznaCC0 - Everything You Ever Dreamed.mp3
+lofi/03 HoliznaCC0 - Pretty Little Lies.mp3
+lofi/04 HoliznaCC0 - Something In the Air.mp3
+lofi/05 HoliznaCC0 - Small Towns Smaller Lives.mp3
+lofi/06 HoliznaCC0 - Mundane.mp3
+lofi/07 HoliznaCC0 - Glad To Be Stuck Inside.mp3.mp3
+lofi/08 HoliznaCC0 - Vintage.mp3.mp3
+lofi/09 HoliznaCC0 - Morning Coffee.mp3
+lofi/10 HoliznaCC0 - A Little Shade.mp3
+lofi/11 HoliznaCC0 - All The Way Sad.mp3
+lofi/12 HoliznaCC0 - Ghosts.mp3
+lofi/13 HoliznaCC0 - Shut up, or shut in.mp3
+lofi/14 HoliznaCC0 - Whatever.mp3
+lofi/15 HoliznaCC0 - Yesterday.mp3
+lofi/16 HoliznaCC0 - Letting Go Of The Past.mp3
+lofi/17 HoliznaCC0 - Cellar Door.mp3
+lofi/18 HoliznaCC0 - You Loved Me Once.mp3
+lofi/19 HoliznaCC0 - Puppy Love.mp3
+lofi/20 HoliznaCC0 - Busted Jazz.mp3
+lofi/21 HoliznaCC0 - Clouds.mp3
+lofi/22 HoliznaCC0 - Ramen.mp3.mp3
+lofi/23 HoliznaCC0 - Seasons Change.mp3
+lofi/24 HoliznaCC0 - Foggy Headed.mp3
+lofi/25 HoliznaCC0 - Creature Comforts.mp3
+lofi/26 HoliznaCC0 - Happy, but a little off.mp3
+lofi/27 HoliznaCC0 - Mixed Signals.mp3
+lofi/28 HoliznaCC0 - New Shoes.mp3
+lofi/29 HoliznaCC0 - Autumn.mp3
+lofi/30 HoliznaCC0 - Static.mp3`.split("\n")
+var allSongs = []
+function begin() {
+    document.getElementsByClassName("overlay")[0].style.display = "none"
+    render()
+
+    for (src of musicPaths) {
+        let song = new Audio()
+        song.src = src
+        song.volume = 0
+        song.play()
+        song.onloadedmetadata = (e) => {
+            allSongs.push({track:song, length:song.duration*1000})
+            if (allSongs.length == musicPaths.length) {
+                playList()
+            }
+        }
+    }
+}
+
+var currentSong = 0
+function playList() {
+    allSongs[currentSong].track.currentTime = 0
+    allSongs[currentSong].track.volume = 1
+    setTimeout(() => {
+        allSongs[currentSong].track.volume = 0
+        currentSong = (currentSong + 1) % allSongs.length
+        playList()
+    }, allSongs[currentSong].length)
+}
