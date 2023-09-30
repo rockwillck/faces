@@ -1,0 +1,13 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+	width: 100vmin;
+	height: 100vmin;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	translate: -50% -50%;
+	background-color: slategray;
+}
