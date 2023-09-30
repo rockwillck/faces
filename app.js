@@ -81,8 +81,8 @@ var offsets = [Math.random(), Math.random(), Math.random(), Math.random(), Math.
 function render() {
     requestAnimationFrame(render)
     ctx.clearRect(0, -200, canvas.width, canvas.height)
-    pupilAngle = angleIndex*2*Math.PI
-    shadowAngle = angleIndex*2*Math.PI
+    pupilAngle = angleIndex*2*Math.PI * 0.1
+    shadowAngle = angleIndex*2*Math.PI * 0.1
 
     jawSlant = getSmoothRandom(angleIndex, offsets[0])*0.5 + 0.5
     secondMultiplier = getSmoothRandom(angleIndex, offsets[1])*3 + 2
